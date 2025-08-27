@@ -23,3 +23,6 @@ jobs:
         run: |
           python -c "print('✅ Python is working!')"
 
+      - name: User
+        run: Boomingggggg
+
