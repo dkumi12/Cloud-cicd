@@ -1,1 +1,25 @@
+name: Basic Test Workflow
+
+on: [push]
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      
+      - name: Echo messages
+        run: |
+          echo "🎉 Hello from GitHub Actions!"
+          echo "This is a test workflow."
+          echo "Date: $(date)"
+
+      
+      - name: Run Python snippet
+        run: |
+          python -c "print('✅ Python is working!')"
 
