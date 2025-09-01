@@ -1,28 +1,39 @@
-name: Basic Test Workflow
+name: Deploy Static Site (Minimal)
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]   # Trigger deploys on push to main
+  workflow_dispatch:        # Allow manual trigger
 
 jobs:
-  test-job:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    
-      - name: Checkout
+      # Step 1: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      
-      - name: Echo messages
+      # Step 2: Setup SSH (write private key, add host fingerprint)
+      - name: Setup SSH
         run: |
-          echo "🎉 Hello from GitHub Actions!"
-          echo "This is a test workflow."
-          echo "Date: $(date)"
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-      
-      - name: Run Python snippet
+      # Step 3: Copy site files to EC2 (example: index.html only)
+      - name: Copy site files to EC2
         run: |
-          python -c "print('✅ Python is working!')"
+          scp -i ~/.ssh/id_rsa index.html \
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/index.html
+          ssh -i ~/.ssh/id_rsa \
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+            "sudo mv /tmp/index.html /var/www/html/"
 
-      - name: User
-        run: whoami
-
+      # Step 4: Restart Nginx to serve new content
+      - name: Restart Nginx
+        run: |
+          ssh -i ~/.ssh/id_rsa \
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+            "sudo systemctl restart nginx"
