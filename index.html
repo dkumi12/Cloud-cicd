@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David Osei Kumi - Static Site</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f2639;
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .intro {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      flex: 1 1 280px;
+      max-width: 350px;
+      text-align: center;
+    }
+
+    .card h2 {
+      margin-bottom: 0.5rem;
+      color: #0f2639;
+    }
+
+    footer {
+      background: #0f2639;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .intro {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome</h1>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        This is a simple static website built by <strong>David Osei Kumi</strong>,  
+        proudly hosted on <strong>Nginx</strong> using <strong>GitHub Actions</strong> and <strong>EC2</strong>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>About</h2>
+      <p>This is a simple responsive static website hosted on Nginx using GitHub Actions and EC2.</p>
+    </div>
+    <div class="card">
+      <h2>Features</h2>
+      <p>✅ Responsive layout<br>✅ Easy to deploy<br>✅ Minimal, clean design</p>
+    </div>
+    <div class="card">
+      <h2>Get Started</h2>
+      <p>Edit <code>index.html</code> in your repo, push to <code>main</code>, and see changes live 🚀.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 David Osei Kumi</p>
+  </footer>
+</body>
+</html>
